@@ -148,9 +148,16 @@ def create_pdf(dataframe):
     pdf.set_auto_page_break(auto=True, margin=15)
     
     # Use DejaVu font which has good Unicode support
-    fonts_dir = os.path.join(os.path.dirname(__file__), '.fonts')
-    pdf.add_font('DejaVu', '', os.path.join(fonts_dir, 'DejaVuSans.ttf'), uni=True)
-    pdf.add_font('DejaVu', 'B', os.path.join(fonts_dir, 'DejaVuSans-Bold.ttf'), uni=True)
+    fonts_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.fonts')
+    try:
+        pdf.add_font('DejaVu', '', os.path.join(fonts_dir, 'DejaVuSans.ttf'), uni=True)
+        pdf.add_font('DejaVu', 'B', os.path.join(fonts_dir, 'DejaVuSans-Bold.ttf'), uni=True)
+    except RuntimeError as e:
+        st.error(f"Fehler beim Laden der Schriftarten: {str(e)}")
+        st.error(f"Erwarteter Pfad: {os.path.join(fonts_dir, 'DejaVuSans.ttf')}")
+        # Fallback auf Standard-Schriftart
+        pdf.set_font('Arial', '', 10)
+        return
     
     # Header mit Autoren und Datum
     pdf.set_font('DejaVu', 'B', 16)
