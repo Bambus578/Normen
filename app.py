@@ -97,12 +97,6 @@ def load_excel() -> pd.DataFrame:
 
 df = load_excel()
 
-import unicodedata, re
-
-for c in df.select_dtypes(include=['object']).columns:
-    df[c] = df[c].map(clean_text)
-
-
 missing = [c for c in EXPECTED_COLS if c not in df.columns]
 if missing:
     st.error("In der Excel fehlen erwartete Spalten: " + ", ".join(missing))
@@ -319,6 +313,7 @@ if not filtered_df.empty:
         file_name=f"Normen_Standards_{datetime.now().strftime('%Y%m%d_%H%M')}.pdf",
         mime="application/pdf"
     )
+
 
 
 
