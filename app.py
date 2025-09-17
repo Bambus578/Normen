@@ -21,7 +21,7 @@ from typing import List
 # -------------------------------------------------------
 # Seite & Styling
 # -------------------------------------------------------
-st.set_page_config(page_title="PM Normen & Standards Explorer", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="Normen und Standards für Projekt-, Programm- und Portfoliomanagement", layout="wide", initial_sidebar_state="expanded")
 
 # Light UI (Seitenleiste & Hintergrund)
 st.markdown(
@@ -123,7 +123,19 @@ for c in KAT_COLS:
 # -------------------------------------------------------
 # UI & Filter
 # -------------------------------------------------------
-st.title("📘 PM Normen & Standards Explorer")
+st.title("📘 Normen und Standards für Projekt-, Programm- und Portfoliomanagement")
+st.subheader("Prof. Dr. Michael Klotz, Prof. Dr. Susanne Marx, Benjamin Birkmann")
+st.subheader("Die hier aufgeführten Normen und Standards des Projekt-, Programm- und Portfoliomanagements wurden im Rahmen eines Arbeitspapiers von Prof. Dr. Michael Klotz und Prof. Dr. Susanne Marx ermittelt. 
+Hierfür kamen Methoden der Dokumentenanalyse, der systematischen Literaturanalyse und der qualitativen Inhaltsanalyse zum Einsatz. 
+Insgesamt werden 37 PM-Normen und 54 PM-Standards, die von 29 Trägerorganisationen publiziert werden, beschrieben. Jede Norm und jeder Standard werden im Arbeitspapier einzeln systematisch dargestellt. 
+Die jeweilige Beschreibung enthält eine Inhaltsangabe, den formellen Status der Norm bzw. des Standards und Links für die eigene weiterführende Recherche. 
+Insofern soll dieses Arbeitspapier nicht nur eine aktuelle, systematische Zusammenstellung bieten, sondern es stellt auch eine Hilfestellung für ein schnelles Orientieren und Nachschlagen dar. 
+Hierfür wurden die PM- Normen und -Standards verschiedenen Kategorien zugeordnet, die ihre inhaltliche Ausrichtung signalisieren.
+
+Das Arbeitspapier steht frei zum Download zur Verfügung:
+https://doi.org/10.13140/RG.2.2.18483.54562
+Ebenso sind als Zusammenfassung Präsentationen auf Deutsch (DOI: 10.13140/RG.2.2.14744.87047) und Englisch (DOI: 10.13140/RG.2.2.21455.75683) verfügbar.")
+
 st.sidebar.header("🔍 Filter")
 
 titel_filter = st.sidebar.text_input("Titel enthält:")
@@ -218,6 +230,18 @@ def create_pdf(dataframe: pd.DataFrame, namen: List[str]) -> bytes:
         Paragraph("Gefilterte Normen und Standards", styles["Heading1"]),
         Paragraph(f"Erstellt am {datetime.now().strftime('%d.%m.%Y, %H:%M')}", styles["Normal"]),
         Spacer(1, 12),
+        Pragraph("Die hier aufgeführten Normen und Standards des Projekt-, Programm- und Portfoliomanagements wurden im Rahmen eines Arbeitspapiers von Prof. Dr. Michael Klotz und Prof. Dr. Susanne Marx ermittelt. 
+        Hierfür kamen Methoden der Dokumentenanalyse, der systematischen Literaturanalyse und der qualitativen Inhaltsanalyse zum Einsatz. 
+        Insgesamt werden 37 PM-Normen und 54 PM-Standards, die von 29 Trägerorganisationen publiziert werden, beschrieben. Jede Norm und jeder Standard werden im Arbeitspapier einzeln systematisch dargestellt. 
+        Die jeweilige Beschreibung enthält eine Inhaltsangabe, den formellen Status der Norm bzw. des Standards und Links für die eigene weiterführende Recherche. 
+        Insofern soll dieses Arbeitspapier nicht nur eine aktuelle, systematische Zusammenstellung bieten, sondern es stellt auch eine Hilfestellung für ein schnelles Orientieren und Nachschlagen dar. 
+        Hierfür wurden die PM- Normen und -Standards verschiedenen Kategorien zugeordnet, die ihre inhaltliche Ausrichtung signalisieren.
+        
+        Das Arbeitspapier steht frei zum Download zur Verfügung:
+        https://doi.org/10.13140/RG.2.2.18483.54562
+        Ebenso sind als Zusammenfassung Präsentationen auf Deutsch (DOI: 10.13140/RG.2.2.14744.87047) und Englisch (DOI: 10.13140/RG.2.2.21455.75683) verfügbar.", styles["Normal"]),
+        Spacer(1, 12),
+
     ]
 
     # --- Tabelle vorbereiten ---
@@ -291,3 +315,4 @@ if not filtered_df.empty:
         file_name=f"Normen_Standards_{datetime.now().strftime('%Y%m%d_%H%M')}.pdf",
         mime="application/pdf"
     )
+
