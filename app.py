@@ -88,27 +88,9 @@ DATA_CANDIDATES = [
     Path("data") / "Tabellarische_Darstellung.xlsx",
 ]
 
-@st.cache_data(show_spinner=False)
-def load_excel() -> pd.DataFrame:
-    for p in DATA_CANDIDATES:
-        if p.exists():
-            return pd.read_excel(p)
-    raise FileNotFoundError("Excel nicht gefunden. EXCEL_PATH anpassen oder Datei ins Repo (data/) legen.")
-
 df = load_excel()
 
 import unicodedata, re
-
-def clean_text(x):
-    if pd.isna(x): 
-        return x
-    s = str(x)
-    s = s.replace('\u00AD', '')   # Soft hyphen
-    s = s.replace('\u00A0', ' ')  # NBSP -> normales Space
-    s = s.replace('\u2013', '-')  # En-dash -> Minus
-    s = unicodedata.normalize('NFKC', s)
-    s = re.sub(r'\s+', ' ', s).strip()
-    return s
 
 for c in df.select_dtypes(include=['object']).columns:
     df[c] = df[c].map(clean_text)
@@ -330,6 +312,7 @@ if not filtered_df.empty:
         file_name=f"Normen_Standards_{datetime.now().strftime('%Y%m%d_%H%M')}.pdf",
         mime="application/pdf"
     )
+
 
 
 
