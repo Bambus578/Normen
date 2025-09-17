@@ -230,8 +230,7 @@ def create_pdf(dataframe: pd.DataFrame, namen: List[str]) -> bytes:
         Paragraph("Gefilterte Normen und Standards", styles["Heading1"]),
         Paragraph(f"Erstellt am {datetime.now().strftime('%d.%m.%Y, %H:%M')}", styles["Normal"]),
         Spacer(1, 12),
-        Paragraph("""Die hier aufgeführten Normen und Standards des Projekt-, Programm- und Portfoliomanagements wurden im Rahmen eines Arbeitspapiers von Prof. Dr. Michael Klotz und Prof. Dr. Susanne Marx ermittelt.<br/>
-        Hierfür kamen Methoden der Dokumentenanalyse, der systematischen Literaturanalyse und der qualitativen Inhaltsanalyse zum Einsatz.<br/>
+        Paragraph("""Die hier aufgeführten Normen und Standards des Projekt-, Programm- und Portfoliomanagements wurden im Rahmen eines Arbeitspapiers von Prof. Dr. Michael Klotz und Prof. Dr. Susanne Marx ermittelt. Hierfür kamen Methoden der Dokumentenanalyse, der systematischen Literaturanalyse und der qualitativen Inhaltsanalyse zum Einsatz.<br/>
         Insgesamt werden 37 PM-Normen und 54 PM-Standards, die von 29 Trägerorganisationen publiziert werden, beschrieben. Jede Norm und jeder Standard werden im Arbeitspapier einzeln systematisch dargestellt.<br/>
         Die jeweilige Beschreibung enthält eine Inhaltsangabe, den formellen Status der Norm bzw. des Standards und Links für die eigene weiterführende Recherche.<br/>
         Insofern soll dieses Arbeitspapier nicht nur eine aktuelle, systematische Zusammenstellung bieten, sondern es stellt auch eine Hilfestellung für ein schnelles Orientieren und Nachschlagen dar.<br/>
@@ -314,6 +313,7 @@ if not filtered_df.empty:
         file_name=f"Normen_Standards_{datetime.now().strftime('%Y%m%d_%H%M')}.pdf",
         mime="application/pdf"
     )
+
 
 
 
